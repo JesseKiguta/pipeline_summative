@@ -2,13 +2,10 @@ from fastapi import FastAPI, HTTPException, UploadFile, File
 import joblib
 import os
 import pandas as pd
-import numpy as np
 from pydantic import BaseModel
 from pymongo import MongoClient
 from dotenv import load_dotenv
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.metrics import accuracy_score, classification_report, log_loss
-from sklearn.preprocessing import LabelEncoder
 
 # Initialize FastAPI app and load environment variables
 app = FastAPI()
