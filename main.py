@@ -1,4 +1,5 @@
 from fastapi import FastAPI, HTTPException, UploadFile, File
+from fastapi.middleware.cors import CORSMiddleware
 import joblib
 import os
 import pandas as pd
@@ -10,6 +11,15 @@ from sklearn.ensemble import RandomForestClassifier
 # Initialize FastAPI app and load environment variables
 app = FastAPI()
 load_dotenv()
+
+# CORS middleware for handling cross-origin requests
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # Load trained model
 MODEL_PATH = "models/rf_aq_model.pkl"
