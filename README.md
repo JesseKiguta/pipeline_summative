@@ -68,7 +68,7 @@ The backend is built using **FastAPI** and provides a set of API endpoints for a
 ---
 
 ## **Demo Video**
-*(Link to be added later)*
+[YouTube link](https://youtu.be/zVdHg-fCnzg)
 
 ---
 
