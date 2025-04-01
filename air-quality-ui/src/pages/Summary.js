@@ -13,7 +13,6 @@ const Summary = () => {
 
     try {
       const response = await fetch("https://clean-air-sentinel.onrender.com/data_summary");
-
       const data = await response.json();
 
       if (response.ok) {
@@ -39,25 +38,38 @@ const Summary = () => {
         </p>
 
         {error && <Alert variant="danger">{error}</Alert>}
+
         {summary && (
           <Card className="p-3 mt-3">
             <h4>Summary Statistics</h4>
-            <Table striped bordered hover>
-              <thead>
-                <tr>
-                  <th>Metric</th>
-                  <th>Value</th>
-                </tr>
-              </thead>
-              <tbody>
-                {Object.entries(summary).map(([key, value]) => (
-                  <tr key={key}>
-                    <td>{key.replace(/_/g, " ")}</td>
-                    <td>{value}</td>
+            {/* Scrollable Table Container */}
+            <div style={{ overflowX: "auto", maxHeight: "400px" }}>
+              <Table striped bordered hover responsive>
+                <thead>
+                  <tr>
+                    <th>Metric</th>
+                    <th>Value</th>
                   </tr>
-                ))}
-              </tbody>
-            </Table>
+                </thead>
+                <tbody>
+                  {Object.entries(summary).map(([key, value]) => {
+                    return typeof value === "object" ? (
+                      Object.entries(value).map(([subKey, subValue]) => (
+                        <tr key={`${key}-${subKey}`}>
+                          <td>{`${key.replace(/_/g, " ")} - ${subKey.replace(/_/g, " ")}`}</td>
+                          <td>{JSON.stringify(subValue)}</td>
+                        </tr>
+                      ))
+                    ) : (
+                      <tr key={key}>
+                        <td>{key.replace(/_/g, " ")}</td>
+                        <td>{JSON.stringify(value)}</td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </Table>
+            </div>
           </Card>
         )}
 
