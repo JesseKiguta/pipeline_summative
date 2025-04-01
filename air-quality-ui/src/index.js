@@ -7,7 +7,7 @@ import Upload from "./pages/Upload";
 import Retrain from "./pages/Retrain";
 import Summary from "./pages/Summary";
 import Visualizations from "./pages/Visualizations";
-import "./styles/styles.css";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
